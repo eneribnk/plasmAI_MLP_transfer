@@ -1,0 +1,13 @@
+batch_size: 5
+budget_tag: '25'
+effective_lr: 0.00294
+git_commit: 68870172605af623329c6c1060cdc301e8784cc5
+n_samples: 25
+norm_mode: target
+seed: 1
+source: None
+strategy: S0
+target: O2
+test_samples: 244
+train_samples: 20
+val_samples: 5

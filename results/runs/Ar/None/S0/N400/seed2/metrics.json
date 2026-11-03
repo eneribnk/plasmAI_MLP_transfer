@@ -1,0 +1,33 @@
+{
+    "experiment": "Ar_None_S0_N400_s2",
+    "mean_r2": 0.998776787519455,
+    "overall_r2": 0.9987784624099731,
+    "mae": 2.2073729038238525,
+    "rmse": 3.539283037185669,
+    "mape": 3.1230571269989014,
+    "test_size": 226,
+    "per_point_r2": {
+        "Point1_EtchRate": 0.998787522315979,
+        "Point2_EtchRate": 0.9987578988075256,
+        "Point3_EtchRate": 0.9987786412239075,
+        "Point4_EtchRate": 0.9987828731536865,
+        "Point5_EtchRate": 0.9988032579421997,
+        "Point6_EtchRate": 0.9988080263137817,
+        "Point7_EtchRate": 0.9987859129905701,
+        "Point8_EtchRate": 0.998777449131012,
+        "Point9_EtchRate": 0.9987613558769226,
+        "Point10_EtchRate": 0.9987249374389648
+    },
+    "per_point_mape": {
+        "Point1_EtchRate": 3.083111524581909,
+        "Point2_EtchRate": 3.0892815589904785,
+        "Point3_EtchRate": 3.1143598556518555,
+        "Point4_EtchRate": 3.077692985534668,
+        "Point5_EtchRate": 3.134012222290039,
+        "Point6_EtchRate": 3.093803644180298,
+        "Point7_EtchRate": 3.17417573928833,
+        "Point8_EtchRate": 3.1190850734710693,
+        "Point9_EtchRate": 3.1365573406219482,
+        "Point10_EtchRate": 3.208491563796997
+    }
+}

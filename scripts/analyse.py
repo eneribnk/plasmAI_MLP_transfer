@@ -1,4 +1,4 @@
-import os
+﻿import os
 import sys
 import pandas as pd
 import numpy as np
@@ -24,21 +24,35 @@ def main():
     elif "n_target" in df.columns:
         group_cols.append("n_target")
 
-    # Summary table: Mean ± Std per experiment condition
     metrics = ["mean_r2", "overall_r2", "mape", "rmse"]
-    grouped = df.groupby(group_cols, dropna=False)[metrics].agg(["mean", "std"])
-    grouped_clean = grouped.fillna(0.0)
 
-    # Save to both summary files
-    out_summary_flat = os.path.join(PROJECT_ROOT, "results", "summary", "aggregated_summary.csv")
-    grouped_clean.reset_index().to_csv(out_summary_flat, sep="\t", index=False)
+    summary_dir = os.path.join(PROJECT_ROOT, "results", "summary")
+    os.makedirs(summary_dir, exist_ok=True)
 
-    out_phase0 = os.path.join(PROJECT_ROOT, "results", "summary", "phase0_sanity_summary.csv")
-    grouped_clean.to_csv(out_phase0, sep="\t")
+    # 1. Master Aggregated Summary (All completed runs across all phases)
+    grouped_all = df.groupby(group_cols, dropna=False)[metrics].agg(["mean", "std"]).fillna(0.0)
+    out_all_flat = os.path.join(summary_dir, "aggregated_summary.csv")
+    grouped_all.reset_index().to_csv(out_all_flat, sep="\t", index=False)
 
-    print(f"Aggregated tab-delimited summary saved to:\n  - {out_summary_flat}\n  - {out_phase0}")
-    print("\nSummary Overview (with absolute sample counts):")
-    print(grouped_clean.to_string())
+    # 2. Phase 0 Sanity Summary (Only full budget runs: sanity benchmark)
+    phase0_df = df[df["budget_tag"].astype(str).str.lower() == "full"]
+    if len(phase0_df) > 0:
+        grouped_p0 = phase0_df.groupby(group_cols, dropna=False)[metrics].agg(["mean", "std"]).fillna(0.0)
+        out_phase0 = os.path.join(summary_dir, "phase0_sanity_summary.csv")
+        grouped_p0.to_csv(out_phase0, sep="\t")
+        print(f"  - Phase 0 Sanity Check summary saved to: {out_phase0}")
+
+    # 3. Phase 1 Scratch Summary (Only S0 scratch learning curves across all budgets)
+    phase1_df = df[df["strategy"] == "S0"]
+    if len(phase1_df) > 0:
+        grouped_p1 = phase1_df.groupby(group_cols, dropna=False)[metrics].agg(["mean", "std"]).fillna(0.0)
+        out_phase1 = os.path.join(summary_dir, "phase1_scratch_summary.csv")
+        grouped_p1.to_csv(out_phase1, sep="\t")
+        print(f"  - Phase 1 Scratch Learning Curves summary saved to: {out_phase1}")
+
+    print(f"  - Master Aggregated summary saved to: {out_all_flat}")
+    print("\nSummary Overview (Master Ledger):")
+    print(grouped_all.to_string())
 
 
 if __name__ == "__main__":

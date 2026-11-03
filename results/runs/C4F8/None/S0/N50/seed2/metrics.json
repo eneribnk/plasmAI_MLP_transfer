@@ -1,0 +1,33 @@
+{
+    "experiment": "C4F8_None_S0_N50_s2",
+    "mean_r2": 0.9801569998264312,
+    "overall_r2": 0.9801601767539978,
+    "mae": 19.57967758178711,
+    "rmse": 30.916213989257812,
+    "mape": 3.5962235927581787,
+    "test_size": 225,
+    "per_point_r2": {
+        "Point1_DepositionRate": 0.9805765151977539,
+        "Point2_DepositionRate": 0.9785556793212891,
+        "Point3_DepositionRate": 0.979810893535614,
+        "Point4_DepositionRate": 0.9804303050041199,
+        "Point5_DepositionRate": 0.9805994033813477,
+        "Point6_DepositionRate": 0.9801270961761475,
+        "Point7_DepositionRate": 0.9797094464302063,
+        "Point8_DepositionRate": 0.9807869791984558,
+        "Point9_DepositionRate": 0.9805083274841309,
+        "Point10_DepositionRate": 0.9804653525352478
+    },
+    "per_point_mape": {
+        "Point1_DepositionRate": 3.662299871444702,
+        "Point2_DepositionRate": 3.6498329639434814,
+        "Point3_DepositionRate": 3.5584146976470947,
+        "Point4_DepositionRate": 3.5215816497802734,
+        "Point5_DepositionRate": 3.5736424922943115,
+        "Point6_DepositionRate": 3.597074270248413,
+        "Point7_DepositionRate": 3.6455137729644775,
+        "Point8_DepositionRate": 3.5905094146728516,
+        "Point9_DepositionRate": 3.5744152069091797,
+        "Point10_DepositionRate": 3.5889523029327393
+    }
+}

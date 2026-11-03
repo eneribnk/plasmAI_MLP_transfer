@@ -1,0 +1,13 @@
+batch_size: 10
+budget_tag: '50'
+effective_lr: 0.00294
+git_commit: 68870172605af623329c6c1060cdc301e8784cc5
+n_samples: 50
+norm_mode: target
+seed: 2
+source: None
+strategy: S0
+target: Ar
+test_samples: 226
+train_samples: 40
+val_samples: 10
