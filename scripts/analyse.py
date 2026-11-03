@@ -13,19 +13,26 @@ def main():
         print(f"No results found at {csv_path}. Run experiments first.")
         return
 
-    df = pd.read_csv(csv_path, sep="\t")
+    # keep_default_na=False ensures string 'None' is preserved and not dropped
+    df = pd.read_csv(csv_path, sep="\t", keep_default_na=False)
+    df["source"] = df["source"].replace("", "None")
     print(f"Loaded {len(df)} runs from {csv_path}")
 
     # Summary table: Mean ± Std per experiment condition
     metrics = ["mean_r2", "overall_r2", "mape", "rmse"]
-    grouped = df.groupby(["target", "source", "strategy", "n_target"])[metrics].agg(["mean", "std"]).reset_index()
+    grouped = df.groupby(["target", "source", "strategy", "n_target"], dropna=False)[metrics].agg(["mean", "std"])
     grouped_clean = grouped.fillna(0.0)
 
-    out_summary = os.path.join(PROJECT_ROOT, "results", "summary", "aggregated_summary.csv")
-    grouped_clean.to_csv(out_summary, sep="\t", index=False)
-    print(f"Aggregated tab-delimited summary saved to: {out_summary}")
+    # Save to both summary files
+    out_summary_flat = os.path.join(PROJECT_ROOT, "results", "summary", "aggregated_summary.csv")
+    grouped_clean.reset_index().to_csv(out_summary_flat, sep="\t", index=False)
+
+    out_phase0 = os.path.join(PROJECT_ROOT, "results", "summary", "phase0_sanity_summary.csv")
+    grouped_clean.to_csv(out_phase0, sep="\t")
+
+    print(f"Aggregated tab-delimited summary saved to:\n  - {out_summary_flat}\n  - {out_phase0}")
     print("\nSummary Overview:")
-    print(grouped_clean.to_string(index=False))
+    print(grouped_clean.to_string())
 
 
 if __name__ == "__main__":

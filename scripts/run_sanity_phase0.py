@@ -89,14 +89,16 @@ def main():
     # 4. Generate Master Summary Table (Tab-delimited)
     all_runs_path = os.path.join(PROJECT_ROOT, "results", "all_runs.csv")
     if os.path.exists(all_runs_path):
-        df = pd.read_csv(all_runs_path, sep="\t")
+        # keep_default_na=False ensures string 'None' is preserved and not parsed as NaN
+        df = pd.read_csv(all_runs_path, sep="\t", keep_default_na=False)
+        df["source"] = df["source"].replace("", "None")
+
         print("\n" + "=" * 80)
         print("PHASE 0 SANITY CHECK RESULTS (Mean +/- Std over seeds):")
         print("=" * 80)
         metrics = ["mean_r2", "overall_r2", "mape", "rmse"]
-        summary = df.groupby(["target", "source", "strategy", "n_target"])[metrics].agg(["mean", "std"])
+        summary = df.groupby(["target", "source", "strategy", "n_target"], dropna=False)[metrics].agg(["mean", "std"])
         
-        # When N_seeds = 1, std is NaN by definition. Fill with 0.0 for clean visual presentation.
         summary_clean = summary.fillna(0.0)
         print(summary_clean.to_string())
 

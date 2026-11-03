@@ -1,5 +1,6 @@
 batch_size: 32
 effective_lr: 0.000294
+git_commit: 10a2ef5e3d4fe9314938ed9b292bf1cdc3a283f7
 n_target: full
 norm_mode: target
 seed: 0

@@ -1,0 +1,12 @@
+batch_size: 32
+effective_lr: 0.000294
+git_commit: 10a2ef5e3d4fe9314938ed9b292bf1cdc3a283f7
+n_target: full
+norm_mode: target
+seed: 2
+source: Ar
+strategy: S1
+target: C4F8
+test_samples: 225
+train_samples: 1020
+val_samples: 255
