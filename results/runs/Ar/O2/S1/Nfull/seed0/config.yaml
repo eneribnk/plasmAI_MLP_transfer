@@ -1,0 +1,11 @@
+batch_size: 32
+effective_lr: 0.000294
+n_target: full
+norm_mode: target
+seed: 0
+source: O2
+strategy: S1
+target: Ar
+test_samples: 226
+train_samples: 1028
+val_samples: 257

@@ -1,0 +1,29 @@
+nn_arch:
+  neurons_per_layer: 20
+  layers: 3
+  activation: "relu"
+  output_activation: null  # Linear output layer (no ELU/ReLU at output, optimal across Ar, O2, C4F8)
+
+training:
+  epochs: 700
+  patience: 50
+  min_delta: 1.0e-5
+  lr_scratch: 0.00294
+  finetune_lr_factor: 0.1
+  weight_decay: 1.7377e-06
+  l1_lambda: 0.0001
+  lambda_smooth: 1.15  # Spatially-Aware Smoothness penalty applied across all 3 chemistries
+  tau_smooth: 0.0      # Curvature tolerance threshold
+  unfreeze_epoch: 100
+  unfreeze_lr_factor: 0.5
+  val_ratio: 0.20
+  fixed_test_ratio: 0.15
+
+smoothing:
+  apply: true
+  window_length: 5
+  polyorder: 2
+
+experiment:
+  budgets: [25, 50, 100, 200, 400, 800, "full"]
+  seeds: [0, 1, 2]

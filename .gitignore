@@ -1,0 +1,19 @@
+# Model weights (stored locally)
+models/runs/
+models/source/
+*.pth
+*.pt
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+venv/
+.venv/
+.ipynb_checkpoints/
+
+# IDE
+.idea/
+.vscode/

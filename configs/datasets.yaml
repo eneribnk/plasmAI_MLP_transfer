@@ -1,0 +1,47 @@
+Ar:
+  data_path: "data/raw/v10_Ar_eth_dataset_full.txt"
+  inputs: ["Power", "Pressure", "Feed", "Vbias"]
+  outputs:
+    - "Point1_EtchRate"
+    - "Point2_EtchRate"
+    - "Point3_EtchRate"
+    - "Point4_EtchRate"
+    - "Point5_EtchRate"
+    - "Point6_EtchRate"
+    - "Point7_EtchRate"
+    - "Point8_EtchRate"
+    - "Point9_EtchRate"
+    - "Point10_EtchRate"
+  rate_type: "EtchRate"
+
+O2:
+  data_path: "data/raw/v3_3_1_O2_eth_dataset_full.txt"
+  inputs: ["Power", "Pressure", "Feed", "Vbias"]
+  outputs:
+    - "Point1_EtchRate"
+    - "Point2_EtchRate"
+    - "Point3_EtchRate"
+    - "Point4_EtchRate"
+    - "Point5_EtchRate"
+    - "Point6_EtchRate"
+    - "Point7_EtchRate"
+    - "Point8_EtchRate"
+    - "Point9_EtchRate"
+    - "Point10_EtchRate"
+  rate_type: "EtchRate"
+
+C4F8:
+  data_path: "data/raw/v10_C4F8_eth_dataset_full.txt"
+  inputs: ["Power", "Pressure", "Feed", "Vbias"]
+  outputs:
+    - "Point1_DepositionRate"
+    - "Point2_DepositionRate"
+    - "Point3_DepositionRate"
+    - "Point4_DepositionRate"
+    - "Point5_DepositionRate"
+    - "Point6_DepositionRate"
+    - "Point7_DepositionRate"
+    - "Point8_DepositionRate"
+    - "Point9_DepositionRate"
+    - "Point10_DepositionRate"
+  rate_type: "DepositionRate"
