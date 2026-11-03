@@ -77,7 +77,8 @@ def main():
         val_ratio=hparams["training"].get("val_ratio", 0.20)
     )
 
-    print(f"Data allocation: Train={len(train_idx)}, Val={len(val_idx)}, Test={len(test_idx)}")
+    n_budget_total = len(train_idx) + len(val_idx)
+    print(f"Data allocation: Total Budget = {n_budget_total} samples (Train = {len(train_idx)}, Val = {len(val_idx)}), Unseen Test = {len(test_idx)}")
 
     # Statistics solely on target train partition
     target_train_stats = compute_statistics(df_tgt, train_idx, tgt_in_cols + tgt_out_cols)
@@ -187,14 +188,15 @@ def main():
         "source": source_name,
         "target": args.target,
         "strategy": args.strategy,
-        "n_target": args.n_target,
+        "budget_tag": args.n_target,
+        "n_samples": n_budget_total,
+        "train_samples": len(train_idx),
+        "val_samples": len(val_idx),
+        "test_samples": len(test_idx),
         "seed": args.seed,
         "norm_mode": args.norm_mode,
         "effective_lr": effective_lr,
         "batch_size": eff_batch,
-        "train_samples": len(train_idx),
-        "val_samples": len(val_idx),
-        "test_samples": len(test_idx),
         "git_commit": git_commit
     }
     with open(os.path.join(exp_dir, "config.yaml"), "w", encoding="utf-8") as f:
@@ -212,15 +214,19 @@ def main():
     )
 
     duration = time.time() - t_start
-    print(f"Run completed in {duration:.1f}s | Test Mean R2: {metrics['mean_r2']:.4f} | "
-          f"MAPE: {metrics['mape']:.2f}% | RMSE: {metrics['rmse']:.4f}")
+    print(f"Run completed in {duration:.1f}s | Budget: {n_budget_total} samples (Train: {len(train_idx)}, Val: {len(val_idx)}) | "
+          f"Test Mean R2: {metrics['mean_r2']:.4f} | MAPE: {metrics['mape']:.2f}% | RMSE: {metrics['rmse']:.4f}")
 
-    # Append to master results/all_runs.csv (Tab-delimited)
+    # Append to master results/all_runs.csv (Tab-delimited) with absolute sample counts
     csv_row = {
         "target": args.target,
         "source": source_name,
         "strategy": args.strategy,
-        "n_target": args.n_target,
+        "budget_tag": args.n_target,
+        "n_samples": n_budget_total,
+        "train_samples": len(train_idx),
+        "val_samples": len(val_idx),
+        "test_samples": len(test_idx),
         "seed": args.seed,
         "norm_mode": args.norm_mode,
         "mean_r2": metrics["mean_r2"],
