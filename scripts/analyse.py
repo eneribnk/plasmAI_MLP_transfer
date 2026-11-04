@@ -50,6 +50,14 @@ def main():
         grouped_p1.to_csv(out_phase1, sep="\t")
         print(f"  - Phase 1 Scratch Learning Curves summary saved to: {out_phase1}")
 
+    # 4. Phase 2 Transfer Summary (Transfer strategies S1, S2, S3 across budgets)
+    phase2_df = df[df["strategy"].isin(["S1", "S2", "S3", "S4"])]
+    if len(phase2_df) > 0:
+        grouped_p2 = phase2_df.groupby(group_cols, dropna=False)[metrics].agg(["mean", "std"]).fillna(0.0)
+        out_phase2 = os.path.join(summary_dir, "phase2_transfer_summary.csv")
+        grouped_p2.to_csv(out_phase2, sep="\t")
+        print(f"  - Phase 2 Transfer Learning summary saved to: {out_phase2}")
+
     print(f"  - Master Aggregated summary saved to: {out_all_flat}")
     print("\nSummary Overview (Master Ledger):")
     print(grouped_all.to_string())

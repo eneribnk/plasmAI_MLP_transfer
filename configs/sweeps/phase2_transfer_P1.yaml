@@ -1,0 +1,15 @@
+﻿# Phase 2: Transfer Learning - Pair P1 (Ar <-> O2) and Pair P2 (Ar/O2 -> C4F8)
+name: "phase2_transfer_P1"
+description: "Transfer learning benchmarks across S1 (Fine-tuning), S2 (Feature Extraction), S3 (Gradual Unfreezing)"
+
+# Pairs: (source, target)
+pairs:
+  - source: "Ar"
+    target: "O2"
+  - source: "O2"
+    target: "Ar"
+
+strategies: ["S1", "S2", "S3"]
+budgets: [25, 50, 100, 200, 400, 800, "full"]
+seeds: [0, 1, 2]
+norm_mode: "target"
